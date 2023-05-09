@@ -526,5 +526,6 @@ name = "math-and-algorithm-104"
 path = "src/bin/104.rs"
 
 [dependencies]
+proconio = '0.4.3'
 
 [dev-dependencies]

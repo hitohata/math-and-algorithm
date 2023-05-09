@@ -1,3 +1,9 @@
+use proconio::input;
+
 fn main() {
-    todo!();
+    input! {
+        n: isize
+    }
+
+    println!("{}", n + 5);
 }
