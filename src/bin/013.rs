@@ -6,23 +6,17 @@ fn main() {
         n: i64
     }
 
-    let mut answer = Vec::<i64>::new();
-    let mut i = 1;
-
-    while i * i <= n {
-
-        if n % i == 0 {
-            answer.push(i);
-            answer.push(n/i);
-        }
-        i += 1;
-    };
+    let mut answer = (1..=n)
+        .take_while(|&j| j * j <= n)
+        .filter(|j| n % j == 0)
+        .map(|j| vec![j, n / j])
+        .flatten()
+        .collect::<Vec<_>>();
 
     answer.sort();
     answer.dedup();
 
-    for a in answer {
-        println!("{}", a);
+    for an in answer {
+        println!("{}", an);
     }
-
 }
