@@ -2,36 +2,34 @@ use proconio::input;
 
 fn main() {
     input!{
-        n: isize,
-        s: isize,
-        _a: [isize; n]
+        n: usize,
+        s: usize,
+        _a: [usize; n]
     };
 
-    let a = _a.to_vec();
+    let mut dp = vec![vec![false; s + 1]; n + 1];
+    dp[0][0] = true;
 
-    let mut answer = false;
+    for i in 1..=n {
+        for j in 0..=s {
+            let v = _a[i - 1];
 
-    for i in 0..1<<n {
-        let mut sum = 0;
-        for j in 0..n {
+            if j < v {
 
-            if i & 1 << j != 0 {
-                sum += a[j as usize]
+                if dp[i - 1][j] {
+                    dp[i][j] = true;
+                }
+
+            } else {
+
+                if dp[i - 1][j] || dp[i - 1][j - v] {
+                    dp[i][j] = true;
+                }
+
             }
-
         }
-
-        if sum == s {
-            answer = true;
-            break;
-        }
-
     }
 
-    if answer {
-        println!("Yes")
-    } else {
-        println!("No")
-    }
+    if dp[n][s] {println!("Yes")} else { println!("No") }
 
 }
