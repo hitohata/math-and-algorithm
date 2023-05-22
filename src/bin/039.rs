@@ -7,29 +7,28 @@ fn main() {
         q: usize
     }
 
-    let mut snow = vec![0_isize; n + 1];
+    let mut snow = vec![0_isize; n + 2];
 
-    for _ in 1..=q {
+    for _ in 0..q {
         input! {
-            l: isize,
-            r: isize,
+            l: usize,
+            r: usize,
             x: isize
         }
 
-        for j in l -1..r {
-            snow[j as usize] += x;
-        }
+        snow[l] += x;
+        snow[r + 1] -= x;
 
     }
 
     for i in 1..n {
-        let result = snow[i - 1] - snow[i];
+        let result = snow[i + 1];
 
         if result < 0 {
-            print!("<");
+            print!(">");
         }
         else if result > 0 {
-            print!(">");
+            print!("<");
         }
         else {
             print!("=")
