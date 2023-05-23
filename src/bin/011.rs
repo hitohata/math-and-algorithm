@@ -2,30 +2,26 @@ use proconio::input;
 
 fn main() {
     input!{
-        n: isize
+        n: usize
     };
 
-    let mut answer_vector = Vec::<i32>::new();
+    let mut primes = vec![true; n + 1];
 
-    for i in 2..=n {
-        if is_prime(i as i32) {
-            answer_vector.push(i as i32);
+    let mut i = 2;
+
+    while i * i <= n {
+        if primes[i] {
+            for j in ((i * 2)..=n).step_by(i) {
+                primes[j] = false;
+            }
         }
+        i += 1;
     }
 
-
-    for i in answer_vector.iter() {
-        print!("{} ", i);
-    }
-
-}
-
-fn is_prime(target: i32) -> bool {
-    for i in 2..target {
-        if target % i == 0 {
-            return false;
+    (2..=n).for_each(|i| {
+        if primes[i] {
+            print!("{} ", i)
         }
-    }
+    });
 
-    return true;
 }
