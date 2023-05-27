@@ -1,3 +1,15 @@
+use proconio::input;
+
 fn main() {
-    todo!();
+
+    input! {
+        n: usize
+    }
+
+    if n % 3 == 0 {
+        println!("Second");
+    } else {
+        println!("First");
+    }
+
 }
